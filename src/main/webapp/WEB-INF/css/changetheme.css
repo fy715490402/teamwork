@@ -1,0 +1,54 @@
+body{
+	margin: 0 0;
+	padding: 0 0;
+	font-family: "microsoft yahei";
+	font-size: 9pt;
+}
+.clearfloat{
+	clear: both;
+}
+#currentLocation{
+	width: 100%;
+	height: 35px;
+	background-color: #EDF6FA;
+	border-bottom: 1px solid #D7E4EA;
+	position: relative;
+}
+#currentLocation span{
+	font-weight: bold;
+	position: absolute;
+	left:20px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+ul{
+	margin: 20px 0 0 20px;
+	padding: 0 0;
+}
+ul#themeArea li{
+	list-style: none;
+	float: left;
+	width: 190px;
+	height: 200px;
+	margin-right: 10px;
+	cursor: pointer;
+	border: 1px solid transparent;
+}
+ul#themeArea li:HOVER{
+	border: 1px solid #D7E4EA;
+}
+ul#themeArea li span{
+	display: block;
+	text-align: center;
+	margin-top: 10px;
+}
+
+.themechange a{
+	color: #1F7CC5;
+	text-decoration: none;
+	margin: 0 10px 0 10px;
+}
+.themechange a:HOVER {
+	color: #FF6600;
+}

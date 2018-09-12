@@ -1,0 +1,114 @@
+body{
+	margin: 0 0;
+	padding: 0 0;
+	font-family: "microsoft yahei";
+	font-size: 9pt;
+}
+.clearfloat{
+	clear: both;
+}
+#currentLocation{
+	width: 100%;
+	height: 35px;
+	background-color: #EDF6FA;
+	border-bottom: 1px solid #D7E4EA;
+	position: relative;
+}
+#currentLocation span{
+	font-weight: bold;
+	position: absolute;
+	left:20px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+#contentArea{
+	padding: 10px;
+}
+#contentArea #buttons{
+	float: left;
+}
+#contentArea #buttons ul{
+	margin: 0;
+	padding: 0;
+}
+#contentArea #buttons ul li{
+	list-style: none;
+	float: left;
+	border: 1px solid #D3DBDE;
+	border-radius: 2px;
+	padding: 6px 10px;
+	margin-right: 5px; 
+	background-color: #F5F8F9;
+	position: relative;
+	width: 60px;
+	height: 25px;
+	cursor: pointer;
+}
+#contentArea #buttons ul li img{
+	position: absolute;
+	top:50%;
+	transform: translateY(-50%);
+}
+#contentArea #buttons ul li span{
+	position: absolute;
+	top:50%;
+	transform: translateY(-50%);
+	left: 40px;
+}
+#contentArea table{
+	width: 100%;
+	border: 1px solid #CBCBCB;
+	margin-top: 20px;
+	border-collapse: collapse;
+	
+}
+#contentArea table th{
+	font-size: 12px;
+	text-align: left;
+	padding-left: 10px;
+	padding-top:10px;
+	padding-bottom:10px;
+	background-color: #F0F5F7;
+	border-bottom: 1px solid #CBCBCB;
+	
+}
+#contentArea table tr.evenline{
+	background-color: rgba(240,245,247,0.7);
+}
+#contentArea table td{
+	font-size: 10px;
+	text-align: left;
+	padding-left: 10px;
+	padding-top:10px;
+	padding-bottom:10px;
+	font-weight: normal;
+}
+
+#pageinfo{
+	margin-top: 10px;
+	position: relative;
+}
+#currentpage{
+	
+}
+ul#viewpages{
+	margin: 0 0;
+	padding: 0 0;
+	float: right;
+}
+ul#viewpages li{
+	float: left;
+	list-style: none;
+	cursor: pointer;
+}
+ul#viewpages li a{
+	padding: 5px 10px;
+	border: 1px solid #DDDDDD;
+	color: #6CC2F0; 
+	text-decoration: none;
+}
+ul#viewpages li a:HOVER {
+	background-color: #F5F5F5;
+}
+

@@ -1,0 +1,23 @@
+body{
+	margin: 0 0;
+	padding: 0 0;
+	font-family: "microsoft yahei";
+	font-size: 9pt;
+}
+.clearfloat{
+	clear: both;
+}
+#currentLocation{
+	width: 100%;
+	height: 35px;
+	background-color: #EDF6FA;
+	border-bottom: 1px solid #D7E4EA;
+	position: relative;
+}
+#currentLocation span{
+	font-weight: bold;
+	position: absolute;
+	left:20px;
+    top: 50%;
+    transform: translateY(-50%);
+}

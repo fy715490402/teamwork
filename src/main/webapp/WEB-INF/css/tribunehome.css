@@ -1,0 +1,113 @@
+body{
+	margin: 0 0;
+	padding: 0 0;
+	font-family: "microsoft yahei";
+	font-size: 9pt;
+}
+.clearfloat{
+	clear: both;
+}
+#currentLocation{
+	width: 100%;
+	height: 35px;
+	background-color: #EDF6FA;
+	border-bottom: 1px solid #D7E4EA;
+	position: relative;
+}
+#currentLocation span{
+	font-weight: bold;
+	position: absolute;
+	left:20px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+#buttons ul{
+	margin: 0 0;
+	padding: 10px;
+}
+#buttons ul li{
+	list-style: none;
+	float: left;
+	border: 1px solid #D3DBDE;
+	border-radius: 2px;
+	padding: 6px 10px;
+	margin-right: 5px; 
+	background-color: #F5F8F9;
+	position: relative;
+	width: 60px;
+	height: 25px;
+	cursor: pointer;
+}
+#buttons ul li img{
+	position: absolute;
+	top:50%;
+	transform: translateY(-50%);
+}
+#buttons ul li span{
+	position: absolute;
+	top:50%;
+	transform: translateY(-50%);
+	left: 40px;
+}
+ul#tribunecontent{
+	margin: 0 0;
+	padding: 0 0;
+}
+ul#tribunecontent li{
+	list-style: none;
+	float: left;
+	border: 1px solid #EBEBEB;
+	margin-left: 10px;
+	margin-top: 25px;
+	/* padding: 10px; */
+	width: 305px;
+	height: 155px;
+	position: relative;
+	cursor: pointer;
+}
+ul#tribunecontent li:HOVER{
+	border: 1px solid #3EAFE0;
+}
+ul#tribunecontent li div{
+	float: left;
+	position: relative;
+	top: 50%;
+	transform: translateY(-50%);
+	left: 15px;
+	margin-right: 20px;
+	width: 100px;
+} 
+
+ul#tribunecontent li div span.subjecttitle{
+	font-weight: bold;
+	line-height: 25px;
+}
+
+.lastarticle{
+	width: 120px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	display: inline-block;
+	text-decoration: none;
+	color: #3395D8;
+}
+.lastarticle:HOVER{
+	text-decoration: underline;
+}
+ul#tribunecontent li div a.enterButton{
+	text-decoration: none;
+	background-color: #3EAFE0;
+	padding: 5px 20px;
+	color: #ffffff;
+	font-weight: bold;
+	margin-top: 10px;
+	display: inline-block;
+	border-radius: 2px;
+}
+ul#tribunecontent li div a.enterButton:HOVER{
+	background-color: #D98C1D;
+}
+ul#tribunecontent li div span{
+	
+}
