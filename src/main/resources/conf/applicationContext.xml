@@ -2,19 +2,44 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:p="http://www.springframework.org/schema/p"
-       xmlns:aop="http://www.springframework.org/schema/aop"
-       xmlns:c="http://www.springframework.org/schema/c"
-       xmlns:jee="http://www.springframework.org/schema/jee"
        xmlns:tx="http://www.springframework.org/schema/tx"
        xmlns:context="http://www.springframework.org/schema/context"
-       xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
-		http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee.xsd
+       xsi:schemaLocation="
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
-		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
         http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
         http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
-    
+    <context:annotation-config />
+    <context:component-scan base-package="com.tw.dao"/>
+    <context:property-placeholder location="classpath:conf/jdbc.properties"/>
+    <tx:annotation-driven transaction-manager="transactionManager"/>
+
+    <bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close">
+        <property name="driverClassName" value="${jdbc.driverClassName}"/>
+        <property name="url" value="${jdbc.url}"/>
+        <property name="username" value="${jdbc.username}"/>
+        <property name="password" value="${jdbc.password}"/>
+        <property name="initialSize" value="8"/>
+        <property name="minIdle" value="1"/>
+        <property name="maxIdle" value="3"/>
+    </bean>
+
+    <bean id="sesseionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean" destroy-method="destroy" p:dataSource-ref="dataSource">
+        <property name="packagesToScan">
+            <list>
+                <value>com.tw.domain</value>
+                <value>com.tw.domain.forum</value>
+            </list>
+        </property>
+        <property name="hibernateProperties">
+            <props>
+                dialect=org.hibernate.dialect.MySQL5InnoDBDialect
+                format_sql=true
+            </props>
+        </property>
+    </bean>
+
+    <bean id="transactionManager" class="org.springframework.orm.hibernate5.HibernateTransactionManager" p:sessionFactory-ref="sesseionFactory"/>
 
 </beans>

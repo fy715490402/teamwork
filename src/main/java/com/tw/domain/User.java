@@ -24,7 +24,7 @@ public class User implements Serializable {
     @GenericGenerator(name = "uuid",strategy = "uuid2")
     private String id;
 
-    @Column
+    @Column(unique = true)
     private String username;
 
     @Column
