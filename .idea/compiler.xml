@@ -9,8 +9,5 @@
         <module name="teamwork" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="teamwork" target="1.8" />
-    </bytecodeTargetLevel>
   </component>
 </project>
