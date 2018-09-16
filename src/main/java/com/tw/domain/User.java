@@ -58,10 +58,10 @@ public class User implements Serializable {
     @OneToMany(cascade = CascadeType.ALL,mappedBy = "user")
     private Set<LoginLog> loginLogs = new HashSet<>();
 
-    @ManyToMany
-    @JoinTable(name = "user_board",
+    @ManyToMany(mappedBy = "manages")
+   /* @JoinTable(name = "user_board",
                 joinColumns = {@JoinColumn(name = "user_id",referencedColumnName = "id")},
-                inverseJoinColumns = {@JoinColumn(name = "board_id",referencedColumnName = "id")})
+                inverseJoinColumns = {@JoinColumn(name = "board_id",referencedColumnName = "id")})*/
     private Set<Board> boards = new HashSet<>(); //用户管理的论坛版块
 
     @OneToMany(cascade = CascadeType.ALL,mappedBy = "user")
