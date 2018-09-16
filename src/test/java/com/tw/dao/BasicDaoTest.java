@@ -3,11 +3,12 @@ package com.tw.dao;
 import org.dbunit.DBTestCase;
 import org.dbunit.JdbcDatabaseTester;
 import org.dbunit.PropertiesBasedJdbcDatabaseTester;
-import org.dbunit.database.DatabaseConfig;
-import org.dbunit.database.DatabaseConnection;
-import org.dbunit.database.IDatabaseConnection;
+import org.dbunit.database.*;
+import org.dbunit.dataset.Column;
 import org.dbunit.dataset.IDataSet;
+import org.dbunit.dataset.filter.ExcludeTableFilter;
 import org.dbunit.dataset.xml.FlatXmlDataSet;
+import org.dbunit.ext.mysql.MySqlConnection;
 import org.dbunit.ext.mysql.MySqlDataTypeFactory;
 import org.junit.After;
 import org.junit.Before;
@@ -46,14 +47,15 @@ public class BasicDaoTest {
     public static void init() throws Exception{
         Class.forName(driverClassName);
         Connection connection = DriverManager.getConnection(url,username,password);
-        IDatabaseConnection iDatabaseConnection = new DatabaseConnection(connection);
+        IDatabaseConnection iDatabaseConnection = new MySqlConnection(connection,"teamwork");
         iDatabaseConnection.getConfig().setProperty(DatabaseConfig.PROPERTY_DATATYPE_FACTORY, new MySqlDataTypeFactory());
-        iDataSet = iDatabaseConnection.createDataSet();
-        System.out.println(iDatabaseConnection.getSchema());
         FlatXmlDataSet.write(iDataSet,new FileOutputStream(new File("team.xml")));
-       /* jdbcDatabaseTester = new JdbcDatabaseTester(driverClassName,url,username,password,"teamwork");
-        System.out.println(jdbcDatabaseTester.getConnection().getSchema());
+        /*jdbcDatabaseTester = new JdbcDatabaseTester(driverClassName,url,username,password,"teamwork");
         iDataSet = jdbcDatabaseTester.getConnection().createDataSet();
+        String[] tableNames=iDataSet.getTableNames();
+        for (int i=0;i<tableNames.length;i++){
+            System.out.println(tableNames[i]);
+        }
         FlatXmlDataSet.write(iDataSet,new FileOutputStream(new File("team.xml")));*/
     }
 

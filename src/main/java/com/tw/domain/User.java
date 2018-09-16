@@ -16,7 +16,7 @@ import java.util.Set;
  * 成员
  */
 @Entity
-@Table(name = "team_user")
+@Table(name = "TEAM_USER")
 public class User implements Serializable {
 
     @Id
