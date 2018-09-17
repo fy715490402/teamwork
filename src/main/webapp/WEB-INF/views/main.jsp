@@ -76,7 +76,7 @@
 	</script>
     <div id="header">
     	<div id="logo">
-    		<a href="<c:url value="/index.jsp"/>"></a>
+    		<a href="<c:url value="/"/>"></a>
     	</div>
     	<div id="shortcutButton">
     		<ul>
@@ -124,7 +124,7 @@
     		</div>
     		<span>当前用户：</span>
     		<div class="username">
-    			Admin
+    			${loginUser.username}
     			<canvas id="viewexitsonmenu" width="10px" height="10px"></canvas>
     			<ul id="exitsonmenu">
     				<li><a>修改密码</a></li>

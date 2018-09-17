@@ -1,4 +1,6 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -26,6 +28,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   	 <div id="currentLocation">
     	<span>位置:</span>
     </div>
-    <h6>Home</h6>
+    <h6>${loginUser.username},欢迎你！</h6>
+     <h6>
+         上次登录时间：<fmt:formatDate value="${lastLoginLog.loginTime}" pattern="yyyy-MM-dd HH:mm:ss"/>
+     </h6>
   </body>
 </html>

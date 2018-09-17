@@ -1,5 +1,6 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
   <head>
@@ -11,7 +12,7 @@
 	<meta http-equiv="expires" content="0">    
 	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 	<meta http-equiv="description" content="This is my page">
-	<link rel="stylesheet" type="text/css" href="<c:url value="/css/tribunehome.css"/>">
+	<link rel="stylesheet" type="text/css" href="<c:url value="/css/board_list.css"/>">
 
   </head>
   
@@ -22,12 +23,14 @@
     <div class="clearfloat"></div>
     <div id="buttons">
     	<ul>
-    		<li><img alt="" src="<c:url value="/images/delete.png"/>"><span>发贴</span></li>
-    	</ul>
+			<li><a href="#"><img alt="" src="<c:url value="/images/delete.png"/>"><span>发贴</span></a></li>
+			<%--创建论坛版块，管理员可见--%>
+			<li><a href="<c:url value="/forum/board/create"/>"><img alt="" src="<c:url value="/images/delete.png"/>"><span>创建论坛版块</span></a></li>
+		</ul>
     </div>
     <div class="clearfloat"></div>
-    <ul id="tribunecontent">
-    	<li>
+    <ul id="board_list">
+    	<%--<li>
     		<div class="subjecticon"><img alt="" src="<c:url value="/images/winlogo.png"/>"></div>
     		<div>
     			<span class="subjecttitle">Windows专区</span><br>
@@ -104,10 +107,9 @@
     			</span>
     			<a  class="enterButton" href="#">进入</a>
     		</div>
-    	</li>
+    	</li>--%>
     </ul>
     
     <div class="clearfloat"></div>
-    
   </body>
 </html>

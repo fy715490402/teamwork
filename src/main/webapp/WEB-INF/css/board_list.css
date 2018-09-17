@@ -49,11 +49,11 @@ body{
 	transform: translateY(-50%);
 	left: 40px;
 }
-ul#tribunecontent{
+ul#board_list{
 	margin: 0 0;
 	padding: 0 0;
 }
-ul#tribunecontent li{
+ul#board_list li{
 	list-style: none;
 	float: left;
 	border: 1px solid #EBEBEB;
@@ -65,10 +65,10 @@ ul#tribunecontent li{
 	position: relative;
 	cursor: pointer;
 }
-ul#tribunecontent li:HOVER{
+ul#board_list li:HOVER{
 	border: 1px solid #3EAFE0;
 }
-ul#tribunecontent li div{
+ul#board_list li div{
 	float: left;
 	position: relative;
 	top: 50%;
@@ -78,7 +78,7 @@ ul#tribunecontent li div{
 	width: 100px;
 } 
 
-ul#tribunecontent li div span.subjecttitle{
+ul#board_list li div span.subjecttitle{
 	font-weight: bold;
 	line-height: 25px;
 }
@@ -95,7 +95,7 @@ ul#tribunecontent li div span.subjecttitle{
 .lastarticle:HOVER{
 	text-decoration: underline;
 }
-ul#tribunecontent li div a.enterButton{
+ul#board_list li div a.enterButton{
 	text-decoration: none;
 	background-color: #3EAFE0;
 	padding: 5px 20px;
@@ -105,9 +105,9 @@ ul#tribunecontent li div a.enterButton{
 	display: inline-block;
 	border-radius: 2px;
 }
-ul#tribunecontent li div a.enterButton:HOVER{
+ul#board_list li div a.enterButton:HOVER{
 	background-color: #D98C1D;
 }
-ul#tribunecontent li div span{
+ul#board_list li div span{
 	
 }

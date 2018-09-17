@@ -116,7 +116,7 @@
                         <contextPath>/teamwork</contextPath>
                     </webApp>
                     <httpConnector>
-                        <port>80</port>
+                        <port>8080</port>
                     </httpConnector>
                     <reload>manual</reload>
                 </configuration>

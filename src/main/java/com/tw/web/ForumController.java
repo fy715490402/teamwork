@@ -1,6 +1,8 @@
 package com.tw.web;
 
+import com.tw.domain.forum.Board;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
@@ -21,6 +23,11 @@ public class ForumController extends BasicController {
     @RequestMapping("/mystore")
     public String mystore(){
         return "forum/mystore";
+    }
+
+    @RequestMapping("/board/create")
+    public String createBoardForm(@ModelAttribute("board")Board board){
+        return "forum/createBoardForm";
     }
     
 }

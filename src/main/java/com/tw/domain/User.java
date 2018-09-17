@@ -5,6 +5,7 @@ import com.tw.domain.forum.Post;
 import com.tw.domain.forum.Topic;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -16,7 +17,7 @@ import java.util.Set;
  * 成员
  */
 @Entity
-@Table(name = "TEAM_USER")
+@Table(name = "team_user")
 public class User implements Serializable {
 
     @Id
@@ -43,7 +44,7 @@ public class User implements Serializable {
     private String headUrl;
 
     @Column
-    @Type(type = "byte")
+    //@Type(type = "byte")
     private boolean enabled = true; //默认值为true
 
     @Column
@@ -56,6 +57,7 @@ public class User implements Serializable {
     private Department department;
 
     @OneToMany(cascade = CascadeType.ALL,mappedBy = "user")
+    @OrderBy("loginTime DESC ")
     private Set<LoginLog> loginLogs = new HashSet<>();
 
     @ManyToMany(mappedBy = "manages")
@@ -149,4 +151,37 @@ public class User implements Serializable {
     public void setDepartment(Department department) {
         this.department = department;
     }
+
+    public Set<LoginLog> getLoginLogs() {
+        return loginLogs;
+    }
+
+    public void setLoginLogs(Set<LoginLog> loginLogs) {
+        this.loginLogs = loginLogs;
+    }
+
+    public Set<Board> getBoards() {
+        return boards;
+    }
+
+    public void setBoards(Set<Board> boards) {
+        this.boards = boards;
+    }
+
+    public Set<Topic> getTopics() {
+        return topics;
+    }
+
+    public void setTopics(Set<Topic> topics) {
+        this.topics = topics;
+    }
+
+    public Set<Post> getPosts() {
+        return posts;
+    }
+
+    public void setPosts(Set<Post> posts) {
+        this.posts = posts;
+    }
+
 }
