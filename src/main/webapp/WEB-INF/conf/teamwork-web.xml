@@ -24,6 +24,8 @@
     <mvc:resources mapping="/images/**" location="/WEB-INF/images/"/>
     <mvc:resources mapping="/css/**" location="/WEB-INF/css/"/>
     <mvc:resources mapping="/js/**" location="/WEB-INF/js/"/>
-    
+
+    <bean class="com.tw.web.listener.InitDateBean"/>
+
     <!--<mvc:default-servlet-handler/>-->
 </beans>

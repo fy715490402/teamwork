@@ -10,6 +10,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
 
 /**
  * @author Administrator
@@ -42,7 +45,12 @@ public class UserController extends BasicController {
                     model.addAttribute(MESSAGE,"用户密码不正确！");
                 }else {
                     setSession("loginUser",_user,request);
-                    setSession("lastLoginLog",(LoginLog)_user.getLoginLogs().iterator().next(),request);
+                    Set<LoginLog> loginLogs = _user.getLoginLogs();
+                    Iterator iterator = loginLogs.iterator();
+                    if (iterator.hasNext()){
+                        LoginLog lastLoginLog = (LoginLog) iterator.next();
+                        setSession("lastLoginLog",(LoginLog)_user.getLoginLogs().iterator().next(),request);
+                    }
                     LoginLog loginLog = new LoginLog();
                     loginLog.setIp(request.getLocalAddr());
                     loginLog.setUser(_user);

@@ -1,9 +1,15 @@
 package com.tw.web;
 
+import com.tw.domain.User;
 import com.tw.domain.forum.Board;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 /**
  * @author Administrator

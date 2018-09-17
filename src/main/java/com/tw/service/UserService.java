@@ -8,7 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.context.ServletContextAware;
 
+import javax.servlet.ServletContext;
 import java.io.Serializable;
 import java.util.List;
 
@@ -57,6 +59,5 @@ public class UserService extends BasicService{
     public List<User> loadAll(){
         return userDao.loadAll();
     }
-
 
 }

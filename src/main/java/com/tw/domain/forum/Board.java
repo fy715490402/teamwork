@@ -71,4 +71,20 @@ public class Board implements Serializable {
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
     }
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
+
+    public Set<User> getManages() {
+        return manages;
+    }
+
+    public void setManages(Set<User> manages) {
+        this.manages = manages;
+    }
 }

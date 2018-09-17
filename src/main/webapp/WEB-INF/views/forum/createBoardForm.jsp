@@ -28,13 +28,11 @@
             <td><input type="file"/></td>
         </tr>
         <tr>
-            <td>设置管理员</td>
+            <td>设置管理员:</td>
             <td>
-               <select multiple="multiple">
-                   <c:forEach items="${users}" var="user">
-                       <option value="${user.username}"/>
-                   </c:forEach>
-               </select>
+              <sf:select path="manages">
+                  <sf:options items="${users}" itemLabel="username" itemValue="id"/>
+              </sf:select>
             </td>
         </tr>
         <tr>

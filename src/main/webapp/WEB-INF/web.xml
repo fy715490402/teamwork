@@ -28,6 +28,10 @@
         <url-pattern>/</url-pattern>
     </servlet-mapping>
 
+    <!--<listener>
+        <listener-class>com.tw.web.listener.InitDateListener</listener-class>
+    </listener>-->
+
     <filter>
         <filter-name>openSessionInViewFilter</filter-name>
         <filter-class>org.springframework.orm.hibernate5.support.OpenSessionInViewFilter</filter-class>
