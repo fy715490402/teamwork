@@ -14,6 +14,17 @@
 	<meta http-equiv="description" content="This is my page">
 	<link rel="stylesheet" type="text/css" href="<c:url value="/css/board_list.css"/>">
 
+      <script type="text/javascript">
+        function x() {
+            var var1 = document.getElementById("create_board");
+            if (var1.style.display = "none"){
+                var1.style.display = "block";
+            } else {
+                var1.style.display = "none";
+            }
+        }
+      </script>
+
   </head>
   
   <body>
@@ -25,7 +36,8 @@
     	<ul>
 			<li><a href="#"><img alt="" src="<c:url value="/images/delete.png"/>"><span>发贴</span></a></li>
 			<%--创建论坛版块，管理员可见--%>
-			<li><a href="<c:url value="/forum/board/create"/>"><img alt="" src="<c:url value="/images/delete.png"/>"><span>创建论坛版块</span></a></li>
+			<li onclick="x()"><a><img alt="" src="<c:url value="/images/delete.png"/>"><span>
+                创建论坛版块</span></a></li>
 		</ul>
     </div>
     <div class="clearfloat"></div>
@@ -111,5 +123,40 @@
     </ul>
     
     <div class="clearfloat"></div>
+    <div id="create_board" style="display: none;position: absolute;float: left">
+        <form action="<c:url value="/forum/board/create"/>" method="post" enctype="multipart/form-data">
+            <table>
+                <tr>
+                    <td>版块名称:</td>
+                    <td><input type="text" name="title" value="123"/></td>
+                </tr>
+                <tr>
+                    <td>版块描述:</td>
+                    <td><input type="text" name="description" value="123"/></td>
+                </tr>
+                <tr>
+                    <td>上传头像:</td>
+                    <td><input type="file"/></td>
+                </tr>
+                <tr>
+                    <td>设置管理员:</td>
+                    <td>
+                        <select name="manages" multiple="multiple" onchange="">
+                            <c:forEach items="${users}" var="user">
+                                <option value="${user.id}">${user.username}</option>
+                            </c:forEach>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <input type="submit" value="新建"/>
+                        <input type="button" value="退出">
+                    </td>
+                </tr>
+            </table>
+        </form>
+
+    </div>
   </body>
 </html>
