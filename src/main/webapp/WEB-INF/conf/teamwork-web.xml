@@ -34,7 +34,11 @@
 
     <bean id="conversionService" class="org.springframework.context.support.ConversionServiceFactoryBean">
         <property name="converters">
-            <bean class="com.tw.web.conversion.IdArrayToObjectSetConversion"/>
+            <set>
+            <!--<bean class="com.tw.web.conversion.IdArrayToObjectSetConversion"/>-->
+            <bean class="com.tw.web.conversion.ArrayToSet"/>
+            <bean class="com.tw.web.conversion.StringToUserConversion"/>
+            </set>
         </property>
     </bean>
 
