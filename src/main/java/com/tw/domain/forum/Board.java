@@ -40,6 +40,17 @@ public class Board implements Serializable {
             inverseJoinColumns = {@JoinColumn(name = "user_id",referencedColumnName = "id")})
     private Set<User> manages = new HashSet<>(); //版块管理员
 
+    @OneToMany(mappedBy = "board")
+    private Set<Topic> topics;
+
+    public Set<Topic> getTopics() {
+        return topics;
+    }
+
+    public void setTopics(Set<Topic> topics) {
+        this.topics = topics;
+    }
+
     public String getId() {
         return id;
     }

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../css/cropper.css">
+    <script type="text/javascript" src="../js/cropper.js"></script>
+    <script type="text/javascript" src="../js/jquery-3.3.1.js"></script>
+    <style type="text/css">
+        img {
+            max-width: 100%; /* This rule is very important, please do not ignore this! */
+        }
+    </style>
+    <!--<script type="text/javascript">
+
+        function drawImage(obj) {
+            /*alert(obj.value);
+            alert(window.URL.createObjectURL(obj.files[0]));*/
+            document.getElementById("image").setAttribute("src",window.URL.createObjectURL(obj.files[0]));
+
+            var $image = $('#image');
+
+            $image.cropper({
+                aspectRatio: 16 / 9,
+                crop: function(event) {
+                    console.log(event.detail.x);
+                    console.log(event.detail.y);
+                    console.log(event.detail.width);
+                    console.log(event.detail.height);
+                    console.log(event.detail.rotate);
+                    console.log(event.detail.scaleX);
+                    console.log(event.detail.scaleY);
+                }
+            });
+
+            // Get the Cropper.js instance after initialized
+            var cropper = $image.data('cropper');
+        }
+
+
+
+    </script>-->
+</head>
+<body>
+
+    <!--<form>
+        <table>
+            <tr>
+                <td>上传图片：</td>
+                <td><input type="file" onchange="drawImage(this)"/></td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <div style="width: 100px;height: 100px;border: 1px solid gray;">
+                        <img style="width: 100px;height: 100px;" id="image"/>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </form>-->
+
+    <div>
+        <img id="image" src="WizNote.png">
+    </div>
+    <script>
+        var $image = $('#image');
+
+        $image.cropper({
+            aspectRatio: 16 / 9,
+            crop: function(event) {
+                console.log(event.detail.x);
+                console.log(event.detail.y);
+                console.log(event.detail.width);
+                console.log(event.detail.height);
+                console.log(event.detail.rotate);
+                console.log(event.detail.scaleX);
+                console.log(event.detail.scaleY);
+            }
+        });
+
+        // Get the Cropper.js instance after initialized
+        var cropper = $image.data('cropper');
+    </script>
+</body>
+</html>

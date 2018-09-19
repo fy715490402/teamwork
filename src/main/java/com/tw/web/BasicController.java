@@ -18,5 +18,4 @@ public class BasicController {
         return request.getSession().getAttribute(key);
     }
 
-
 }

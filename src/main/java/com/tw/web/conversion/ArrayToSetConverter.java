@@ -1,19 +1,19 @@
 package com.tw.web.conversion;
 
-import com.tw.domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.TypeDescriptor;
 import org.springframework.core.convert.converter.ConditionalGenericConverter;
-import org.springframework.core.convert.converter.GenericConverter;
 import org.springframework.orm.hibernate5.HibernateTemplate;
 
-import java.lang.reflect.ParameterizedType;
-import java.lang.reflect.Type;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
-public class ArrayToSet implements ConditionalGenericConverter {
+/**
+ *  将String数组转换成Set集合
+ *  String数组中元素为实体类的Id
+ */
+public class ArrayToSetConverter implements ConditionalGenericConverter {
 
     @Autowired
     private HibernateTemplate hibernateTemplate;
@@ -34,34 +34,33 @@ public class ArrayToSet implements ConditionalGenericConverter {
     @Override
     public Set<ConvertiblePair> getConvertibleTypes() {
        Set<ConvertiblePair> set = new HashSet<>();
-       set.add(new ConvertiblePair(String[].class,Set<>.class));
+       set.add(new ConvertiblePair(String[].class,Set.class));
        return set;
     }
 
     @Override
     public Object convert(Object source, TypeDescriptor sourceType, TypeDescriptor targetType) {
+        System.out.println("***************start convert*****************");
         Set objects = new HashSet<>();
-
-        ParameterizedType type = (ParameterizedType) targetType.getType().getGenericSuperclass();
-        Type[] types = type.getActualTypeArguments();
-        entityClass = (Class) types[0];
+        /*
+            getElementTypeDescriptor()：如果此类型是数组，则返回数组的组件类型。如果此类型是流，则返回流的组件类型。
+            如果此类型是一个集合，并且它是参数化的，则返回集合的元素类型。如果集合没有参数化，返回null，表示没有声明元素类型。
+         */
+        entityClass = targetType.getElementTypeDescriptor().getType();
         String[] ids = (String[]) source;
         for (int i=0;i<ids.length;i++){
             objects.add(hibernateTemplate.get(entityClass,ids[i]));
         }
-        Iterator iterator=objects.iterator();
-        while (iterator.hasNext()){
-            System.out.println(iterator.next());
-        }
+//        Iterator iterator=objects.iterator();
+//        while (iterator.hasNext()){
+//            System.out.println(iterator.next());
+//        }
         return objects;
     }
 
     @Override
     public boolean matches(TypeDescriptor sourceType, TypeDescriptor targetType) {
-        System.out.println(targetType.getObjectType().getGenericSuperclass());
-        System.out.println(sourceType);
         if(sourceType.getType().equals(String[].class)&&Set.class.isAssignableFrom(targetType.getType())){
-            System.out.println("*************true**************");
             return true;
         }
         return false;

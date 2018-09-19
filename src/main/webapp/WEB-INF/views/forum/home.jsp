@@ -1,6 +1,8 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
   <head>
@@ -17,7 +19,7 @@
       <script type="text/javascript">
         function x() {
             var var1 = document.getElementById("create_board");
-            if (var1.style.display = "none"){
+            if (var1.style.display == "none"){
                 var1.style.display = "block";
             } else {
                 var1.style.display = "none";
@@ -42,7 +44,22 @@
     </div>
     <div class="clearfloat"></div>
     <ul id="board_list">
-    	<%--<li>
+        <c:forEach items="${boards}" var="board">
+            <li>
+                <div class="subjecticon"><img alt="" src="<c:url value="/files/${board.imageUrl}"/>"></div>
+                <div>
+                    <span class="subjecttitle">${board.title}</span><br>
+                    <span>贴数：${fn:length(board.topics)}</span><br>
+                    <span>
+    				<a class="lastarticle" href="#">
+    					<span class="lastarticle_title">windows域控之间如何添加域信任</span><br>2小时前 剑缘傲雪
+    				</a>
+    			</span>
+                    <a class="enterButton" href="#">进入</a>
+                </div>
+            </li>
+        </c:forEach>
+        <%--<li>
     		<div class="subjecticon"><img alt="" src="<c:url value="/images/winlogo.png"/>"></div>
     		<div>
     			<span class="subjecttitle">Windows专区</span><br>
@@ -123,23 +140,25 @@
     </ul>
     
     <div class="clearfloat"></div>
-    <div id="create_board" style="display: none;position: absolute;float: left">
+    <div id="create_board">
+        <div id="create_board_title"></div>
+        <div id="create_board_form">
         <form action="<c:url value="/forum/board/create"/>" method="post" enctype="multipart/form-data">
             <table>
                 <tr>
                     <td>版块名称:</td>
-                    <td><input type="text" name="title" value="123"/></td>
+                    <td><input type="text" name="title"/></td>
                 </tr>
                 <tr>
                     <td>版块描述:</td>
-                    <td><input type="text" name="description" value="123"/></td>
+                    <td><input type="text" name="description"/></td>
                 </tr>
                 <tr>
                     <td>上传头像:</td>
-                    <td><input type="file"/></td>
+                    <td><input type="file" name="file"/></td>
                 </tr>
                 <tr>
-                    <td>设置管理员:</td>
+                    <td class="top_align">设置管理员:</td>
                     <td>
                         <select name="manages" multiple="multiple" onchange="">
                             <c:forEach items="${users}" var="user">
@@ -156,7 +175,8 @@
                 </tr>
             </table>
         </form>
-
+        </div>
+    </div>
     </div>
   </body>
 </html>

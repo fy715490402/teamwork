@@ -22,13 +22,14 @@
 
     <!--文件上传解析器-->
     <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
-
+        <property name="uploadTempDir" value="WEB-INF/temp"/>
     </bean>
     
     <!--静态资源映射-->
     <mvc:resources mapping="/images/**" location="/WEB-INF/images/"/>
     <mvc:resources mapping="/css/**" location="/WEB-INF/css/"/>
     <mvc:resources mapping="/js/**" location="/WEB-INF/js/"/>
+    <mvc:resources mapping="/files/**" location="file:///home/fy/tools/temp/"/>
 
     <bean class="com.tw.web.listener.InitDateBean"/>
 
@@ -36,8 +37,8 @@
         <property name="converters">
             <set>
             <!--<bean class="com.tw.web.conversion.IdArrayToObjectSetConversion"/>-->
-            <bean class="com.tw.web.conversion.ArrayToSet"/>
-            <bean class="com.tw.web.conversion.StringToUserConversion"/>
+            <bean class="com.tw.web.conversion.ArrayToSetConverter"/>
+            <!--<bean class="com.tw.web.conversion.StringToUserConversion"/>-->
             </set>
         </property>
     </bean>
