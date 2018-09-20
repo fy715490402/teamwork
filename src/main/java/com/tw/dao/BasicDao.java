@@ -4,6 +4,7 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.lang.Nullable;
 import org.springframework.orm.hibernate5.HibernateCallback;
 import org.springframework.orm.hibernate5.HibernateTemplate;
 import org.springframework.transaction.annotation.Transactional;
@@ -100,13 +101,16 @@ public class BasicDao<T> {
      * @param objects
      * @return
      */
-    public Page<T> pagedQuery(String hql,int pageSize,int pageNo,Object... objects){
-        String queryCountStatement = "select count(*)"+removeSelect(removeOrders(hql));
+    public Page<T> pagedQuery(String hql,int pageSize, int pageNo, Object... objects){
+        String queryCountStatement = "select count(*) "+removeSelect(removeOrders(hql));
+        //赋值
         //数据库记录总数
-        int count = hibernateTemplate.execute(session -> (Integer) session.createQuery(queryCountStatement).uniqueResult());
+        int count =
+                hibernateTemplate.execute(session -> ((Long)createQueryStatement(session,queryCountStatement,objects).uniqueResult()).intValue());
         if (count<1){
             return new Page<>();
         }
+
         List list = hibernateTemplate.execute(session -> {
             Query query = createQueryStatement(session,hql,objects);
             return query.setFirstResult((pageNo-1)*pageSize).setMaxResults(pageNo*pageSize-1).list();

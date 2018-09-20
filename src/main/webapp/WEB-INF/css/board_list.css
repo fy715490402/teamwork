@@ -76,7 +76,12 @@ ul#board_list li div{
 	left: 15px;
 	margin-right: 20px;
 	width: 100px;
-} 
+}
+
+.subjecticon img{
+	width: 105px;
+	height: 115px;
+}
 
 ul#board_list li div span.subjecttitle{
 	font-weight: bold;

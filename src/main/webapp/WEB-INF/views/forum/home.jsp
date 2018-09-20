@@ -52,10 +52,14 @@
                     <span>贴数：${fn:length(board.topics)}</span><br>
                     <span>
     				<a class="lastarticle" href="#">
-    					<span class="lastarticle_title">windows域控之间如何添加域信任</span><br>2小时前 剑缘傲雪
+                        <c:if test="${fn:length(board.topics)>0}">
+                            <span class="lastarticle_title">${board.topics.iterator().next().title}</span>
+                            <br>
+                            <span id="date_evaluation"></span>${board.topics.iterator().next().user.username}
+                        </c:if>
     				</a>
     			</span>
-                    <a class="enterButton" href="#">进入</a>
+                    <a class="enterButton" href="<c:url value="/forum/${board.id}/topics/1"/>">进入</a>
                 </div>
             </li>
         </c:forEach>

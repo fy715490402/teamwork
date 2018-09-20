@@ -48,7 +48,7 @@ public class Topic implements Serializable {
     private Set<Post> posts = new HashSet<>();
 
     @Transient
-    private MainPost mainPost;
+    private MainPost mainPost = new MainPost();
 
     public String getId() {
         return id;

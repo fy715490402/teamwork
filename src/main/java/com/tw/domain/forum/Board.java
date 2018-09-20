@@ -41,6 +41,7 @@ public class Board implements Serializable {
     private Set<User> manages = new HashSet<>(); //版块管理员
 
     @OneToMany(mappedBy = "board")
+    @OrderBy("createTime DESC ")
     private Set<Topic> topics;
 
     public Set<Topic> getTopics() {

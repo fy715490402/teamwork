@@ -84,6 +84,7 @@
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
             <version>4.0.1</version>
+            <scope>provided</scope>
         </dependency>
         
         <dependency>
@@ -118,6 +119,9 @@
     <build>
         <plugins>
             <plugin>
+                <dependencies>
+
+                </dependencies>
                 <groupId>org.eclipse.jetty</groupId>
                 <artifactId>jetty-maven-plugin</artifactId>
                 <version>${jetty.version}</version>
