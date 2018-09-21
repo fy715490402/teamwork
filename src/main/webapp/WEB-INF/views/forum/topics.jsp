@@ -17,7 +17,7 @@
 
     <a href="<c:url value="/forum/${boardId}/topics/new"/>">发帖</a>
     <br>
-    <table>
+    <table border="1px">
         <tr>
             <th>主题</th>
             <th>作者</th>

@@ -4,6 +4,7 @@ import com.tw.dao.Page;
 import com.tw.domain.User;
 import com.tw.domain.forum.Board;
 import com.tw.domain.forum.MainPost;
+import com.tw.domain.forum.Post;
 import com.tw.domain.forum.Topic;
 import com.tw.service.ForumService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -108,6 +109,14 @@ public class ForumController extends BasicController {
         Topic topic = forumService.getTopicById(topicId);
         model.addAttribute("topic",topic);
         return "forum/showTopic";
+    }
+
+    @RequestMapping("/topics/{topicId}/newPost")
+    public String newPost(@PathVariable("topicId") Serializable topicId, Post post,HttpServletRequest request){
+        post.setTopic(forumService.getTopicById(topicId));
+        post.setUser((User) getSession("loginUser",request));
+        forumService.addPost(post);
+        return "redirect:/forum/topics/"+topicId;
     }
 
     /**
