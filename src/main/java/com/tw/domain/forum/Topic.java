@@ -45,6 +45,7 @@ public class Topic implements Serializable {
     private User user;
 
     @OneToMany(cascade = CascadeType.ALL,mappedBy = "topic")
+    @OrderBy("createTime asc ")
     private Set<Post> posts = new HashSet<>();
 
     @Transient
