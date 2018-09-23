@@ -11,7 +11,69 @@
 <html>
 <head>
     <title>${topic.title}</title>
+    <style type="text/css">
+        #bbs_detail_wrap{
+            width: 90%;
+            margin: 10px auto;
+            /*position: relative;*/
+        }
 
+        #topic_title{
+            height: 44px;
+            line-height: 44px;
+            border-top-left-radius: 4px;
+            border-top-right-radius: 4px;
+            padding: 0 24px;
+            margin: 8px 0 1px;
+            box-shadow: 0 2px 4px 0 rgba(0,0,0,0.5);
+        }
+
+        .mod_fun_wrap{
+            margin-top: 20px;
+        }
+
+        .post_area{
+            border:1px solid gray;
+        }
+
+        dt,dd{
+            display: table-cell;
+        }
+
+        .post_user_info{
+            width: 152px;
+            background-color: #fafbfc;
+            box-shadow: inset -1px 0 0 rgba(0,0,0,.06);
+            /*position: relative;*/
+            padding-bottom: 5px;
+            border-collapse: collapse;
+        }
+
+        .post_detail{
+            border-bottom: 1px solid gray;
+        }
+
+        dl{
+            margin: 0 0;
+        }
+
+
+        #editor{
+            width: 90%;
+            height: 200px;
+            margin: 50px auto;
+        }
+
+        .buttons{
+            margin-top: 95px;
+            margin-left: 80px;
+        }
+
+        .clear_left{
+            clear: both;
+        }
+
+    </style>
 </head>
 <body>
 <%--<script type="text/javascript" charset="UTF-8" src="/teamwork/utf8-jsp/ueditor.config.js"></script>
@@ -21,37 +83,36 @@
 <script type="text/javascript" charset="UTF-8" src="<c:url value="/ueditor/ueditor.all.js"/>"></script>
 <script type="text/javascript" charset="UTF-8" src="<c:url value="/ueditor/lang/zh-cn/zh-cn.js"/>"></script>
 <script type="text/javascript" src="<c:url value="/js/jquery-3.3.1.js"/>"/>
-<style type="text/css">
-    div {
-        width: 100%;
-    }
-</style>
+
 <script type="text/javascript">
 </script>
-<a href="#">回复</a>
-<table border="1px solid gray">
-    <tr>
-        <td colspan="2">
-            ${topic.title}
-        </td>
-    </tr>
-    <c:forEach items="${topic.posts}" var="post">
-        <tr>
-            <td>${post.user.username}</td>
-            <td>${post.content}</td>
-        </tr>
-    </c:forEach>
-</table>
 
-<form method="post" action="">
 
-</form>
+<div id="bbs_detail_wrap">
 
-<%--富文本编辑器--%>
-    <div id="editor" style="width: 80%;height: 400px">
+    <div id="topic_title">${topic.title}</div>
+    <div class="mod_fun_wrap clearfix"></div>
+    <div class="post_area">
+        <c:forEach items="${topic.posts}" var="post">
+            <div id="post-${post.id}" class="post_detail">
+                <dl>
+                    <dt class="post_user_info">${post.user.username}</dt>
+                    <dd class="post_content">${post.content}</dd>
+                </dl>
+            </div>
+        </c:forEach>
     </div>
+
+</div>
+
+<div class="clear_left"></div>
+<%--富文本编辑器--%>
+    <div id="editor">
+    </div>
+    <div class="buttons">
     <button onclick="submit_post()">提交回复</button>
     <button onclick="getContent()">获得内容</button>
+    </div>
     <input type="hidden" id="topic_id" value="${topic.id}">
     <input type="hidden" id="rootPath" value="${pageContext.servletContext.contextPath}">
     <script>
@@ -79,6 +140,5 @@
             form.submit();
         }
     </script>
-
 </body>
 </html>
