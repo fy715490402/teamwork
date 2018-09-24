@@ -14,15 +14,17 @@ import javax.servlet.http.HttpServletResponse;
  *
  */
 @RestController
-@RequestMapping("/ueditor")
 public class UEditorController extends BasicController {
 
-    @RequestMapping("/")
+    @RequestMapping("/ueditor")
     public ResponseEntity<String> config(HttpServletRequest request, HttpServletResponse response) throws Exception{
         request.setCharacterEncoding("UTF-8");
         response.setHeader("Content-Type" , "text/html");
         String rootPath=request.getSession().getServletContext().getRealPath("/");
-        return new ResponseEntity<String>(new ActionEnter(request,rootPath).exec(), HttpStatus.OK);
+        String contextPath = request.getContextPath();
+        String uri = request.getRequestURI();
+        return new ResponseEntity<String>(new ActionEnter(request,rootPath).exec(),
+                HttpStatus.OK);
     }
 
 }

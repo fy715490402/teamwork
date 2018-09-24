@@ -22,7 +22,7 @@
 
     /*var URL = window.UEDITOR_HOME_URL || getUEBasePath();*/
     /*var UEDITOR_HOME_URL = "/teamwork/utf8-jsp/";*/
-    var URL =window.UEDITOR_HOME_URL || "/teamwork/ueditor/";
+    var URL =window.UEDITOR_HOME_URL || "/teamwork/ueditor/jsp/";
 
     /**
      * 配置项主体。注意，此处所有涉及到路径的配置别遗漏URL变量。

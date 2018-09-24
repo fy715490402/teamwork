@@ -13,6 +13,7 @@ public class Page<T> {
     private int pageSize;   //每页显示条数
     private int count;  //记录总数
     private int pageNo; //页码
+    private int pageCount; //总共多少页
     private List<T> list;
 
     public Page() {

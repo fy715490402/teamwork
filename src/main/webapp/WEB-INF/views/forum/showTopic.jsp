@@ -93,7 +93,7 @@
     <div id="topic_title">${topic.title}</div>
     <div class="mod_fun_wrap clearfix"></div>
     <div class="post_area">
-        <c:forEach items="${topic.posts}" var="post">
+        <c:forEach items="${postPage.list}" var="post">
             <div id="post-${post.id}" class="post_detail">
                 <dl>
                     <dt class="post_user_info">${post.user.username}</dt>
@@ -102,7 +102,11 @@
             </div>
         </c:forEach>
     </div>
-
+    <div class="page_no">
+        <c:forEach begin="1" end="${postPage.pageCount}" step="1" var="i">
+            <a href="<c:url value="/forum/topics/${topic.id};pageNo=${i}"/>">${i}</a>
+        </c:forEach>
+    </div>
 </div>
 
 <div class="clear_left"></div>

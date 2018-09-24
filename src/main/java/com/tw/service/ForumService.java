@@ -102,4 +102,8 @@ public class ForumService extends BasicService {
         return postDao.save(post);
     }
 
+    public Page<Post> getPostsByTopicId(Serializable id,int pageSize,int pageNo){
+        return postDao.getPostsByTopicId(id,pageSize,pageNo);
+    }
+
 }

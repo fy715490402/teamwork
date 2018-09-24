@@ -48,6 +48,14 @@ public class ForumController extends BasicController {
         this.forumService = forumService;
     }
 
+    /**
+     * 处理文件上传
+     */
+    @RequestMapping("/upload")
+    public void upload(MultipartFile file){
+        System.out.println("文件名称:"+file.getOriginalFilename());
+    }
+
     @RequestMapping("/")
     public String home(Model model){
         List<Board> boards = forumService.getAllBoards();
@@ -105,8 +113,11 @@ public class ForumController extends BasicController {
     }
 
     @RequestMapping("/topics/{topicId}")
-    public String showTopic(@PathVariable("topicId")Serializable topicId,Model model){
+    public String showTopic(@PathVariable("topicId")Serializable topicId,
+                            @MatrixVariable(required = false,defaultValue = "1")int pageNo, Model model){
+        Page<Post> postPage = forumService.getPostsByTopicId(topicId,20,pageNo);
         Topic topic = forumService.getTopicById(topicId);
+        model.addAttribute("postPage",postPage);
         model.addAttribute("topic",topic);
         return "forum/showTopic";
     }
@@ -126,5 +137,5 @@ public class ForumController extends BasicController {
     private String getFileServerUrl() {
        return "";
     }
-    
+
 }
