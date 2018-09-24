@@ -13,24 +13,20 @@ import java.util.Set;
 public class Test {
 
     public static void main(String[] args) {
-        /*SessionFactory sessionFactory=null;
+        SessionFactory sessionFactory=null;
         Session session=null;
         try {
             sessionFactory=new Configuration().configure("conf/hibernate.cfg.xml").buildSessionFactory();
-            *//*session=sessionFactory.openSession();
+            /*session=sessionFactory.openSession();
             Transaction transaction=session.beginTransaction();
             Department department=new Department();
             department.setName("ee");
             session.save(department);
-            transaction.commit();*//*
+            transaction.commit();*/
         }finally {
            // session.close();
             sessionFactory.close();
-        }*/
-        User user = new User();
-        Set<User> users = new HashSet<>();
-        users.add(user);
-        System.out.println(String[].class);
+        }
     }
 
 }
