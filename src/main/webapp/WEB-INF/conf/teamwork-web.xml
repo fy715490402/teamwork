@@ -20,11 +20,18 @@
         <property name="order" value="20"/>
     </bean>
 
-    <!--文件上传解析器-->
-    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+    <!--自定义文件上传解析器，用于UEditor上传-->
+    <bean id="multipartResolver" class="com.tw.web.Resolver.MultipartResolver">
         <property name="uploadTempDir" value="WEB-INF/temp"/>
+        <property name="defaultEncoding" value="utf-8"/>
+        <property name="excludeUrls" value="/forum/upload"/>
     </bean>
-    
+
+   <!-- <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <property name="uploadTempDir" value="WEB-INF/temp"/>
+        <property name="defaultEncoding" value="utf-8"/>
+    </bean>
+    -->
     <!--静态资源映射-->
     <mvc:resources mapping="/images/**" location="/WEB-INF/images/"/>
     <mvc:resources mapping="/css/**" location="/WEB-INF/css/"/>

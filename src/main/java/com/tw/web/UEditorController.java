@@ -31,10 +31,7 @@ public class UEditorController extends BasicController {
     }*/
 
     @RequestMapping("/controller")
-    public String ueditorConfig(HttpServletRequest request, HttpEntity entity){
-        if(request.getParameter("action")!=null){
-            System.out.println(entity);
-        }
+    public String ueditorConfig(HttpServletRequest request){
         return "ueditorController";
     }
 

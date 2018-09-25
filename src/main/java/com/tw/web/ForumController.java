@@ -1,5 +1,11 @@
 package com.tw.web;
 
+import com.baidu.ueditor.PathFormat;
+import com.baidu.ueditor.define.BaseState;
+import com.baidu.ueditor.define.FileType;
+import com.baidu.ueditor.define.State;
+import com.baidu.ueditor.upload.BinaryUploader;
+import com.baidu.ueditor.upload.StorageManager;
 import com.tw.dao.Page;
 import com.tw.domain.User;
 import com.tw.domain.forum.Board;
@@ -7,6 +13,11 @@ import com.tw.domain.forum.MainPost;
 import com.tw.domain.forum.Post;
 import com.tw.domain.forum.Topic;
 import com.tw.service.ForumService;
+import org.apache.commons.fileupload.FileItemIterator;
+import org.apache.commons.fileupload.FileItemStream;
+import org.apache.commons.fileupload.FileUploadException;
+import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.ConversionService;
 import org.springframework.stereotype.Controller;
@@ -14,18 +25,18 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.Serializable;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * @author Administrator
@@ -49,11 +60,72 @@ public class ForumController extends BasicController {
     }
 
     /**
-     * 处理文件上传
+     * 处理Ueditor文件上传
      */
     @RequestMapping("/upload")
-    public void upload(MultipartFile file){
-        System.out.println("文件名称:"+file.getOriginalFilename());
+    @ResponseBody
+    public String upload(HttpServletRequest request) throws IOException{
+
+        FileItemStream fileStream = null;
+        boolean isAjaxUpload = request.getHeader("X_Requested_With") != null;
+        if (!ServletFileUpload.isMultipartContent(request)) {
+            return new BaseState(false, 5).toJSONString();
+        } else {
+            ServletFileUpload upload = new ServletFileUpload(new DiskFileItemFactory());
+            if (isAjaxUpload) {
+                upload.setHeaderEncoding("UTF-8");
+            }
+
+            try {
+                for(FileItemIterator iterator = upload.getItemIterator(request); iterator.hasNext(); fileStream = null) {
+                    fileStream = iterator.next();
+                    if (!fileStream.isFormField()) {
+                        break;
+                    }
+                }
+
+                if (fileStream == null) {
+                    return new BaseState(false, 7).toJSONString();
+                } else {
+                    String savePath = "/home/fy/tools/temp/";
+                    String originFileName = fileStream.getName();
+                    String suffix = FileType.getSuffixByFilename(originFileName);
+                    //生产新的文件名
+                    originFileName = UUID.randomUUID().toString();
+                    savePath = savePath + originFileName +suffix;
+                    //long maxSize = (Long)conf.get("maxSize");
+                    if (!validType(suffix)) {
+                        return new BaseState(false, 8).toJSONString();
+                    } else {
+                        savePath = PathFormat.parse(savePath, originFileName);
+                        //String physicalPath = (String)conf.get("rootPath") + savePath;
+                        String physicalPath =  savePath;
+                        InputStream is = fileStream.openStream();
+                        State storageState = StorageManager.saveFileByInputStream(is, physicalPath, 2048000);
+                        is.close();
+                        if (storageState.isSuccess()) {
+                            storageState.putInfo("url", request.getContextPath()+"/files/"+originFileName+suffix);
+                            storageState.putInfo("type", suffix);
+                            storageState.putInfo("original", originFileName + suffix);
+                        }
+
+                        return storageState.toJSONString();
+                    }
+                }
+            } catch (FileUploadException var14) {
+                return new BaseState(false, 6).toJSONString();
+            } catch (IOException var15) {
+                return new BaseState(false, 4).toJSONString();
+            }
+        }
+
+
+    }
+
+    public boolean validType(String type){
+        String[] allowTypes=new String[]{".png", ".jpg", ".jpeg", ".gif", ".bmp"};
+        List<String> list = Arrays.asList(allowTypes);
+        return list.contains(type);
     }
 
     @RequestMapping("/")

@@ -62,11 +62,12 @@
             width: 90%;
             height: 200px;
             margin: 50px auto;
+            position: static;
         }
 
         .buttons{
-            margin-top: 95px;
-            margin-left: 80px;
+            position: relative;
+            top: 50px;
         }
 
         .clear_left{
@@ -111,9 +112,9 @@
 
 <div class="clear_left"></div>
 <%--富文本编辑器--%>
-    <div id="editor">
-    </div>
-    <div class="buttons">
+    <script id="editor">
+    </script>
+    <div class="btns">
     <button onclick="submit_post()">提交回复</button>
     <button onclick="getContent()">获得内容</button>
     </div>
@@ -121,6 +122,16 @@
     <input type="hidden" id="rootPath" value="${pageContext.servletContext.contextPath}">
     <script>
         var editor = UE.getEditor("editor");
+        UE.Editor.prototype._bkGetActionUrl = UE.Editor.prototype.getActionUrl;
+        UE.Editor.prototype.getActionUrl = function(action) {
+            if (action == 'uploadimage' || action == 'uploadscrawl' || action == 'uploadimage') {
+                return 'http://localhost:8080/teamwork/forum/upload';
+            } else if (action == 'uploadvideo') {
+                return 'http://a.b.com/video.php';
+            } else {
+                return this._bkGetActionUrl.call(this, action);
+            }
+        }
         function getContent() {
             var arr = [];
             arr.push("使用editor.getContent()方法可以获得编辑器的内容");

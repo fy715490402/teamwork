@@ -2,6 +2,7 @@ package com.tw.domain.forum;
 
 import com.tw.domain.User;
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -24,7 +25,8 @@ public class Post implements Serializable {
     @GenericGenerator(name = "uuid",strategy = "uuid2")
     private String id;
 
-    @Column
+    @Column(columnDefinition = "text")
+    @Lob
     private String content; //回复内容
 
     @Column
