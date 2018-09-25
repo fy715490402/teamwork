@@ -112,8 +112,8 @@
 
 <div class="clear_left"></div>
 <%--富文本编辑器--%>
-    <script id="editor">
-    </script>
+    <span id="editor">
+    </span>
     <div class="btns">
     <button onclick="submit_post()">提交回复</button>
     <button onclick="getContent()">获得内容</button>
